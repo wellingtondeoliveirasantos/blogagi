@@ -2,12 +2,14 @@
 describe('Pesquisa', () => {
 
     beforeEach(() => {
+
         cy.visit('/') 
-        cy.get('#search-open').click()
+        cy.findByRole('button', {name: /Pesquisar/i}).click()
+        
     });
     
     it('palavra chave com sucesso', () => {
-      
+
         cy.get('.desktop-search > .search-form > label > .search-field').type('Pix').click()
         cy.get('.desktop-search > .search-form > .search-submit').click()
 
