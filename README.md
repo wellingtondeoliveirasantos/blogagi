@@ -9,9 +9,8 @@ Execute npm install (ou npm i para a versão curta) para instalar as dependênci
 ### Testes
 Execute npm run cy:run para executar o teste no modo headless.
 Ou execute npm run cy:open para abrir o aplicativo Cypress e executar os testes no modo interativo.
-### Cenarios de Teste
 
-|Produto         |
+|Cenarios de Teste|
 |----------------|
 |[CT001-AGI-BLOG]-palavra chave com sucesso|
 |[CT002-AGI-BLOG]-data sem sucesso exibir mensagem informativa|
