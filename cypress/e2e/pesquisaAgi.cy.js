@@ -1,49 +1,28 @@
-
 describe('Pesquisa', () => {
 
     beforeEach(() => {
-
-        cy.visit('/') 
-        cy.findByRole('button', {name: /Pesquisar/i}).click()
-        
+        cy.visit('/')
+        cy.get('.site-header-above-section-right > .ast-builder-layout-element').click();
+        cy.get('.site-header-above-section-right > .ast-builder-layout-element').click();
     });
-    
-    it('palavra chave com sucesso', () => {
 
-        cy.get('.desktop-search > .search-form > label > .search-field').type('Pix').click()
-        cy.get('.desktop-search > .search-form > .search-submit').click()
+    it('pesquisa bem-sucedida por palavra-chave', () => {
+        cy.get('.site-header-above-section-right > .ast-builder-layout-element').type('Pix').click()
+        cy.contains(' Search Results for: ')
+    })
 
-        cy.contains('Resultados da busca por: Pix')
+    it('pesquisa sem sucesso por data deve exibir mensagem informativa', () => {
+        cy.get('.site-header-above-section-right > .ast-builder-layout-element').type('02/12/9999').click()
+        cy.contains('Lamentamos, mas nada foi encontrado para sua pesquisa, tente novamente com outras palavras.')
+    })
+
+    it('pesquisa sem sucesso por caracteres especiais deve exibir mensagem informativa', () => {
+        cy.get('.site-header-above-section-right > .ast-builder-layout-element').type('@trasfer#').click()
+        cy.contains('Lamentamos, mas nada foi encontrado para sua pesquisa, tente novamente com outras palavras.')
 
     })
 
-    it('data sem sucesso exibir mensagem informativa', () => {
-  
-        cy.get('.desktop-search > .search-form > label > .search-field').type('02/12/2000').click()
-        cy.get('.desktop-search > .search-form > .search-submit').click()
-
-        cy.contains('Nenhum resultado')
-        cy.contains('Não encontramos nada para estes termos de busca. Tente novamente com palavras-chave diferentes.')
-
+    it('listar todo o conteúdo da página', () => {
+        cy.get('.site-header-above-section-right > .ast-builder-layout-element').click()
     })
-
-    it('caracter especial sem sucesso exibir mensagem informativa', () => {
-  
-        cy.get('.desktop-search > .search-form > label > .search-field').type('@trasfer#').click()
-        cy.get('.desktop-search > .search-form > .search-submit').click()
-
-        cy.contains('Nenhum resultado')
-        cy.contains('Não encontramos nada para estes termos de busca. Tente novamente com palavras-chave diferentes.')
-
-    })
-
-    it('listar todo conteudo da pagina', () => {
-  
-        cy.get('.desktop-search > .search-form > label > .search-field').click()
-        cy.get('.desktop-search > .search-form > .search-submit').click()
-
-        cy.contains('Resultados da busca por:')
-
-    })
-
-  })
+})
